@@ -2,1337 +2,647 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f8f8f5">
-  <meta name="description" content="Learn coding through creative projects, interactive lessons and challenges at CraftCode. Explore AI coding, animation, debugging and Scratch.">
-
-  <title>CraftCode — Learn to Create</title>
-
-  <style>
-    :root {
-      --bg: #f8f8f5;
-      --surface: #ffffff;
-      --ink: #22251f;
-      --muted: #777b73;
-      --line: #e7e8e1;
-      --blue: #dce9f8;
-      --blue-dark: #345d89;
-      --green: #e5eddf;
-      --radius: 16px;
-      --max: 1120px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, input, select, textarea {
-      font: inherit;
-    }
-
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 44px));
-      margin: auto;
-    }
-
-    /* NAVIGATION */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(248, 248, 245, .95);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-    }
-
-    .nav {
-      height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: -1.2px;
-    }
-
-    .logo span {
-      color: #537da9;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      font-size: 14px;
-      color: #555950;
-    }
-
-    .nav-links a:hover {
-      color: var(--blue-dark);
-    }
-
-    .nav-cta {
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: var(--ink);
-      color: white !important;
-      font-weight: 600;
-    }
-
-    .menu-button {
-      display: none;
-      background: none;
-      border: 0;
-      font-size: 25px;
-      cursor: pointer;
-      color: var(--ink);
-    }
-
-    /* HERO */
-
-    .hero {
-      padding: 105px 0 90px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: center;
-      gap: 65px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--blue-dark);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      margin-bottom: 23px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      height: 7px;
-      width: 7px;
-      border-radius: 50%;
-      background: #7195b8;
-    }
-
-    .hero h1 {
-      font-size: clamp(46px, 6vw, 76px);
-      line-height: 1.04;
-      letter-spacing: -4px;
-      font-weight: 750;
-      max-width: 650px;
-    }
-
-    .hero h1 span {
-      color: #557da6;
-    }
-
-    .hero-description {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 475px;
-      margin-top: 25px;
-      line-height: 1.8;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      padding: 13px 21px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 700;
-      border: 1px solid var(--ink);
-      transition: .2s;
-      cursor: pointer;
-    }
-
-    .button-dark {
-      background: var(--ink);
-      color: white;
-    }
-
-    .button-dark:hover {
-      background: #41483e;
-      transform: translateY(-2px);
-    }
-
-    .button-light {
-      border-color: var(--line);
-      background: white;
-    }
-
-    .button-light:hover {
-      border-color: #aabbd0;
-    }
-
-    .hero-note {
-      margin-top: 28px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* HERO VISUAL */
-
-    .hero-visual {
-      min-height: 365px;
-      background: #e7edf3;
-      border-radius: 24px;
-      padding: 25px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .code-window {
-      background: #fff;
-      border: 1px solid rgba(0,0,0,.05);
-      box-shadow: 0 20px 55px rgba(45,65,85,.12);
-      width: 100%;
-      max-width: 360px;
-      border-radius: 13px;
-      overflow: hidden;
-      transform: rotate(-3deg);
-    }
-
-    .window-top {
-      height: 39px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      padding: 0 14px;
-      gap: 6px;
-    }
-
-    .dot {
-      height: 8px;
-      width: 8px;
-      border-radius: 50%;
-      background: #d5d9d5;
-    }
-
-    .window-body {
-      padding: 23px;
-      font-family: monospace;
-      font-size: 13px;
-      line-height: 2.1;
-      color: #58616a;
-    }
-
-    .code-purple { color: #8564a8; }
-    .code-blue { color: #477da9; }
-    .code-green { color: #5d936b; }
-    .code-orange { color: #bb8254; }
-
-    .visual-label {
-      position: absolute;
-      background: white;
-      padding: 10px 15px;
-      border-radius: 9px;
-      font-size: 12px;
-      font-weight: 700;
-      box-shadow: 0 5px 20px rgba(0,0,0,.06);
-    }
-
-    .label-one {
-      top: 30px;
-      right: 18px;
-    }
-
-    .label-two {
-      bottom: 25px;
-      left: 15px;
-    }
-
-    /* SHARED SECTIONS */
-
-    section {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      max-width: 570px;
-      margin-bottom: 38px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(30px, 4vw, 43px);
-      letter-spacing: -1.8px;
-      line-height: 1.15;
-      margin-bottom: 13px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    /* COURSES */
-
-    .courses-section {
-      background: white;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 17px;
-    }
-
-    .course-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 27px;
-      background: #fff;
-      transition: .2s;
-    }
-
-    .course-card:hover {
-      border-color: #b5c8dc;
-      transform: translateY(-3px);
-    }
-
-    .course-icon {
-      height: 47px;
-      width: 47px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .icon-ai { background: #e7edf8; }
-    .icon-animation { background: #f5e9e2; }
-    .icon-debug { background: #e8eee2; }
-    .icon-scratch { background: #f4efdc; }
-
-    .course-card h3 {
-      font-size: 21px;
-      letter-spacing: -.5px;
-      margin-bottom: 8px;
-    }
-
-    .course-card p {
-      color: var(--muted);
-      font-size: 14px;
-      min-height: 48px;
-      margin-bottom: 20px;
-    }
-
-    .course-link {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--blue-dark);
-    }
-
-    .course-link:hover {
-      text-decoration: underline;
-    }
-
-    /* HOW IT WORKS */
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-
-    .step {
-      border-top: 1px solid #d8dcd3;
-      padding-top: 20px;
-    }
-
-    .step-number {
-      font-size: 12px;
-      color: #6285a8;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .step h3 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    /* PRICING */
-
-    .pricing-section {
-      background: #eef1eb;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .price-card {
-      background: white;
-      border: 1px solid #e0e4dc;
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .price-card.featured {
-      border: 2px solid #6587aa;
-    }
-
-    .price-tag {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-
-    .price {
-      font-size: 39px;
-      font-weight: 750;
-      letter-spacing: -2px;
-      margin: 12px 0 0;
-    }
-
-    .price small {
-      font-size: 13px;
-      letter-spacing: 0;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .price-description {
-      font-size: 13px;
-      color: var(--muted);
-      margin: 10px 0 22px;
-      min-height: 42px;
-    }
-
-    .price-card .button {
-      margin-top: auto;
-      width: 100%;
-    }
-
-    .pricing-note {
-      font-size: 12px;
-      color: #6f756d;
-      margin-top: 20px;
-    }
-
-    /* ABOUT */
-
-    .about-layout {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 65px;
-      align-items: center;
-    }
-
-    .about-box {
-      background: var(--blue);
-      min-height: 275px;
-      border-radius: 20px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 30px;
-    }
-
-    .about-symbol {
-      font-size: 60px;
-      color: #456b91;
-      line-height: 1.2;
-    }
-
-    .about-box p {
-      font-size: 14px;
-      color: #486581;
-      font-weight: 700;
-    }
-
-    .about-text h2 {
-      font-size: 36px;
-      letter-spacing: -1.5px;
-      line-height: 1.2;
-      margin-bottom: 18px;
-    }
-
-    .about-text p {
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 13px;
-    }
-
-    /* FAQ */
-
-    .faq-section {
-      background: white;
-    }
-
-    .faq-list {
-      max-width: 760px;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .faq-item summary {
-      padding: 21px 0;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .faq-item summary::after {
-      content: "+";
-      color: var(--blue-dark);
-      font-size: 21px;
-    }
-
-    .faq-item[open] summary::after {
-      content: "−";
-    }
-
-    .faq-item p {
-      font-size: 14px;
-      color: var(--muted);
-      padding: 0 0 20px;
-    }
-
-    /* REGISTRATION */
-
-    .register-section {
-      background: #e8edf2;
-    }
-
-    .register-layout {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 55px;
-      align-items: start;
-    }
-
-    .register-info h2 {
-      font-size: 39px;
-      letter-spacing: -1.8px;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .register-info p {
-      color: #63717d;
-      font-size: 15px;
-    }
-
-    .form-card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #dce2e8;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .field {
-      margin-bottom: 17px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid #dedfdc;
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 14px;
-      color: var(--ink);
-      background: white;
-      outline: none;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: #7394b5;
-      box-shadow: 0 0 0 3px rgba(115,148,181,.12);
-    }
-
-    .field textarea {
-      resize: vertical;
-      min-height: 90px;
-    }
-
-    .form-submit {
-      width: 100%;
-      border: none;
-      margin-top: 5px;
-    }
-
-    .form-message {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 12px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #252a25;
-      color: white;
-      padding: 48px 0 24px;
-    }
-
-    .footer-main {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      padding-bottom: 35px;
-    }
-
-    .footer-brand .logo {
-      margin-bottom: 10px;
-    }
-
-    .footer-brand p {
-      font-size: 13px;
-      color: #b9beb7;
-      max-width: 270px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 25px;
-      font-size: 13px;
-      color: #c5c9c2;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid #424741;
-      padding-top: 20px;
-      font-size: 12px;
-      color: #aeb4aa;
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 45px;
-        padding: 75px 0;
-      }
-
-      .hero-visual {
-        min-height: 300px;
-      }
-
-      .about-layout,
-      .register-layout {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .price-description {
-        min-height: auto;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        width: min(var(--max), calc(100% - 32px));
-      }
-
-      .nav {
-        height: 65px;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 65px;
-        left: 0;
-        width: 100%;
-        background: var(--bg);
-        padding: 20px 22px;
-        border-bottom: 1px solid var(--line);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 18px;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-cta {
-        text-align: center;
-      }
-
-      .hero {
-        padding: 65px 0;
-      }
-
-      .hero h1 {
-        letter-spacing: -2.8px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      section {
-        padding: 68px 0;
-      }
-
-      .course-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .form-card {
-        padding: 21px;
-      }
-
-      .footer-main,
-      .footer-bottom {
-        flex-direction: column;
-      }
-
-      .footer-links {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CraftCode coding classes. Learn AI coding, animation, debugging and Scratch by building real projects.">
+<title>CraftCode — Coding classes</title>
+<style>
+:root{
+  --paper:#fbfaf7;
+  --ink:#191919;
+  --blue:#244ed8;
+  --muted:#777;
+  --line:#deddd8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+.wrap{width:min(1100px,92%);margin:auto}
+header{border-bottom:1px solid var(--line)}
+.nav{
+  min-height:66px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.brand{font-size:22px;font-weight:800;letter-spacing:-1px}
+.brand span{color:var(--blue)}
+.navlinks{display:flex;gap:25px;align-items:center;font-size:13px}
+.navlinks a:hover{color:var(--blue)}
+.join{
+  color:white!important;background:var(--ink);
+  padding:9px 15px;
+}
+.menu{display:none;background:none;border:none;font-size:24px}
+.hero{
+  padding:85px 0 65px;
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:50px;align-items:center;
+}
+.small{
+  font-size:11px;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--blue);font-weight:700;
+}
+.hero h1{
+  font-size:clamp(48px,7vw,82px);
+  letter-spacing:-5px;line-height:.99;
+  margin:20px 0;
+}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero p{color:#646464;max-width:460px;font-size:16px}
+.actions{display:flex;gap:18px;align-items:center;margin-top:28px}
+.primary{
+  display:inline-block;background:var(--ink);color:white;
+  padding:12px 18px;font-size:13px;font-weight:bold;
+}
+.textlink{font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.hero-art{
+  border:1px solid var(--line);padding:18px;
+  background:#f0eee8;
+}
+.art-head{
+  display:flex;justify-content:space-between;
+  font-size:10px;letter-spacing:1px;
+  text-transform:uppercase;color:#777;
+  margin-bottom:14px;
+}
+.pixel{
+  background:#c7d7f8;
+  min-height:250px;position:relative;
+  overflow:hidden;
+}
+.pixel svg{width:100%;height:100%;display:block}
+.art-caption{
+  border-top:1px solid #d4d1c9;margin-top:14px;
+  padding-top:10px;font-size:12px;
+  display:flex;justify-content:space-between;
+}
+.section{padding:70px 0;border-top:1px solid var(--line)}
+.heading{
+  display:flex;justify-content:space-between;
+  align-items:end;gap:20px;margin-bottom:35px;
+}
+.heading h2{
+  font-size:clamp(30px,4vw,46px);
+  letter-spacing:-2px;line-height:1.1;
+}
+.heading p{color:var(--muted);font-size:13px;max-width:350px}
+.course-list{border-top:1px solid var(--ink)}
+.course{
+  display:grid;grid-template-columns:70px 1fr 1fr 40px;
+  align-items:center;gap:20px;
+  padding:23px 10px;border-bottom:1px solid var(--line);
+  transition:background .15s;
+}
+.course:hover{background:#f1f0ec}
+.course-num{font-size:12px;color:var(--blue)}
+.course h3{font-size:22px;letter-spacing:-.7px}
+.course p{font-size:13px;color:#737373;max-width:400px}
+.arrow{font-size:20px;text-align:right}
+.course a{display:contents}
+.course a:hover h3{color:var(--blue)}
+.work{
+  background:#efeee9;
+  padding:65px 0;
+}
+.work-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:50px;align-items:center;
+}
+.work h2{
+  font-size:clamp(30px,4vw,45px);
+  letter-spacing:-2px;line-height:1.1;margin:15px 0;
+}
+.work p{font-size:14px;color:#666;max-width:450px}
+.mini-project{
+  background:#fff;border:1px solid #d8d7d2;
+  padding:20px;
+}
+.project-top{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:#666;padding-bottom:14px;
+}
+.project-visual{
+  background:#20232c;min-height:220px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.project-visual svg{width:100%;display:block}
+.project-bottom{
+  display:flex;justify-content:space-between;
+  padding-top:12px;font-size:12px;
+}
+.steps{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+.step{border-top:2px solid var(--ink);padding-top:15px}
+.step .num{font-size:12px;color:var(--blue)}
+.step h3{font-size:19px;margin:12px 0 7px}
+.step p{font-size:13px;color:#666}
+.prices{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+}
+.price{
+  padding:25px 22px;
+  border-right:1px solid var(--line);
+}
+.price:last-child{border-right:none}
+.price .name{font-size:12px;color:#666}
+.price h3{font-size:38px;letter-spacing:-2px;margin:12px 0}
+.price h3 small{font-size:12px;letter-spacing:0;color:#777;font-weight:normal}
+.price p{font-size:13px;color:#666;min-height:45px}
+.price a{display:inline-block;margin-top:20px;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.price:nth-child(2){background:#f0f1f8}
+.price-note{font-size:11px;color:#777;margin-top:15px}
+.about{
+  display:grid;grid-template-columns:130px 1fr;
+  gap:35px;align-items:start;
+}
+.about-mark{
+  font-size:70px;color:var(--blue);
+  font-weight:bold;line-height:1;
+}
+.about h2{font-size:35px;letter-spacing:-1.5px;margin-bottom:15px}
+.about p{max-width:600px;color:#666;font-size:14px;margin-bottom:12px}
+.faq{max-width:750px}
+details{border-bottom:1px solid var(--line)}
+summary{
+  padding:19px 0;cursor:pointer;
+  font-size:14px;font-weight:bold;list-style:none;
+}
+summary::after{content:"+";float:right;font-size:20px}
+details[open] summary::after{content:"−"}
+details p{padding:0 0 18px;color:#666;font-size:13px}
+.register{
+  background:#e9edf7;
+  padding:65px 0;
+}
+.reg-grid{
+  display:grid;grid-template-columns:.8fr 1.2fr;
+  gap:55px;align-items:start;
+}
+.reg-intro h2{
+  font-size:43px;line-height:1.05;
+  letter-spacing:-2px;margin:15px 0;
+}
+.reg-intro p{font-size:14px;color:#666}
+form{background:var(--paper);padding:25px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{margin-bottom:15px}
+label{display:block;font-size:12px;font-weight:bold;margin-bottom:6px}
+input,select,textarea{
+  width:100%;border:1px solid #d7d7d2;
+  background:white;padding:11px;
+  border-radius:0;font-size:13px;outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+textarea{min-height:90px;resize:vertical}
+.submit{
+  border:0;background:var(--ink);color:white;
+  padding:13px 18px;font-weight:bold;font-size:13px;
+  cursor:pointer;width:100%;
+}
+.form-note{font-size:11px;color:#777;margin-top:12px}
+#status{font-size:12px;margin-top:10px}
+footer{padding:30px 0}
+.footer{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:20px;
+}
+.footer p{font-size:11px;color:#777}
+.footerlinks{display:flex;gap:18px;font-size:12px}
+@media(max-width:750px){
+  .hero{grid-template-columns:1fr;padding:55px 0;gap:35px}
+  .hero h1{letter-spacing:-3px}
+  .course{grid-template-columns:40px 1fr 30px;gap:10px}
+  .course p{grid-column:2;grid-row:2}
+  .course .arrow{grid-column:3;grid-row:1/3}
+  .work-grid,.reg-grid{grid-template-columns:1fr;gap:30px}
+  .prices{grid-template-columns:1fr}
+  .price{border-right:none;border-bottom:1px solid var(--line)}
+  .price:last-child{border-bottom:none}
+  .steps{grid-template-columns:1fr;gap:25px}
+  .about{grid-template-columns:60px 1fr;gap:20px}
+  .about-mark{font-size:45px}
+  .heading{align-items:start;flex-direction:column}
+}
+@media(max-width:550px){
+  .menu{display:block}
+  .navlinks{
+    display:none;position:absolute;top:66px;left:0;right:0;
+    padding:20px;background:var(--paper);
+    border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:stretch;
+  }
+  .navlinks.open{display:flex}
+  .join{text-align:center}
+  .fields{grid-template-columns:1fr}
+  .footer{flex-direction:column;align-items:start}
+}
+</style>
 </head>
-
 <body>
 
-  <!-- NAVIGATION -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">Craft<span>Code</span></a>
+    <button class="menu" id="menu" aria-label="Toggle menu">☰</button>
+    <nav class="navlinks" id="nav">
+      <a href="#courses">Courses</a>
+      <a href="#approach">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#register" class="join">Get started ↗</a>
+    </nav>
+  </div>
+</header>
 
-  <header>
-    <div class="container nav">
-      <a href="#home" class="logo">Craft<span>Code</span>.</a>
-
-      <button class="menu-button" id="menuButton"
-        aria-label="Open navigation" aria-expanded="false">☰</button>
-
-      <nav class="nav-links" id="navLinks">
-        <a href="#courses">Courses</a>
-        <a href="#how">How it works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#about">About</a>
-        <a href="#register" class="nav-cta">Get started ↗</a>
-      </nav>
+<main>
+<div class="wrap hero">
+  <div>
+    <div class="small">Coding classes · Online</div>
+    <h1>Ideas are nice.<br><em>Build them.</em></h1>
+    <p>
+      Learn coding by actually making things.
+      Explore AI, animation, debugging and Scratch
+      through lessons and hands-on challenges.
+    </p>
+    <div class="actions">
+      <a href="#courses" class="primary">Browse classes ↗</a>
+      <a href="#approach" class="textlink">How classes work</a>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <div class="hero-art">
+    <div class="art-head">
+      <span>Student project</span><span>001 / Scratch</span>
+    </div>
+    <div class="pixel">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" aria-label="Pixel art game landscape">
+        <rect width="480" height="300" fill="#c8d8f6"/>
+        <circle cx="365" cy="68" r="38" fill="#f7d97a"/>
+        <g fill="#fff">
+          <rect x="70" y="42" width="60" height="15"/>
+          <rect x="55" y="57" width="90" height="15"/>
+          <rect x="85" y="72" width="40" height="15"/>
+          <rect x="235" y="90" width="70" height="15"/>
+          <rect x="220" y="105" width="100" height="15"/>
+        </g>
+        <path d="M0 190 L90 110 L165 185 L255 95 L370 190 L480 120 L480 300 L0 300Z" fill="#91b1dc"/>
+        <path d="M0 225 L100 160 L210 235 L320 145 L480 230 L480 300 L0 300Z" fill="#6184bc"/>
+        <rect x="0" y="250" width="480" height="50" fill="#315f94"/>
+        <g fill="#284c76">
+          <rect x="30" y="225" width="45" height="25"/>
+          <rect x="75" y="210" width="45" height="40"/>
+          <rect x="120" y="225" width="30" height="25"/>
+          <rect x="350" y="215" width="40" height="35"/>
+          <rect x="390" y="200" width="40" height="50"/>
+        </g>
+        <!-- pixel character -->
+        <g transform="translate(210 192)">
+          <rect x="10" y="0" width="35" height="15" fill="#f3c46a"/>
+          <rect x="0" y="15" width="55" height="40" fill="#e9f1ff"/>
+          <rect x="8" y="25" width="10" height="10" fill="#20283a"/>
+          <rect x="35" y="25" width="10" height="10" fill="#20283a"/>
+          <rect x="15" y="40" width="25" height="5" fill="#20283a"/>
+          <rect x="5" y="55" width="15" height="15" fill="#e9f1ff"/>
+          <rect x="35" y="55" width="15" height="15" fill="#e9f1ff"/>
+          <rect x="-10" y="25" width="10" height="25" fill="#f3c46a"/>
+          <rect x="55" y="25" width="10" height="25" fill="#f3c46a"/>
+        </g>
+        <g fill="#f7d97a">
+          <rect x="160" y="160" width="15" height="15"/>
+          <rect x="175" y="145" width="15" height="15"/>
+          <rect x="190" y="160" width="15" height="15"/>
+          <rect x="175" y="175" width="15" height="15"/>
+        </g>
+      </svg>
+    </div>
+    <div class="art-caption">
+      <span>Built from code.</span><span>Not just played.</span>
+    </div>
+  </div>
+</div>
 
-    <!-- HERO -->
+<section class="section" id="courses">
+  <div class="wrap">
+    <div class="heading">
+      <h2>Classes</h2>
+      <p>Pick a starting point. No need to know everything already.</p>
+    </div>
+    <div class="course-list">
+      <a class="course" href="#register" data-course="AI Coding">
+        <span class="course-num">01</span>
+        <h3>AI Coding</h3>
+        <p>Explore AI, build projects and learn how code and intelligent systems work together.</p>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="course" href="#register" data-course="Animation Coding">
+        <span class="course-num">02</span>
+        <h3>Animation Coding</h3>
+        <p>Make moving characters, visual effects and animations using programming.</p>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="course" href="#register" data-course="Debugging">
+        <span class="course-num">03</span>
+        <h3>Debugging</h3>
+        <p>Learn to investigate code, spot mistakes and solve programming problems.</p>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="course" href="#register" data-course="Scratch">
+        <span class="course-num">04</span>
+        <h3>Scratch</h3>
+        <p>Build games, stories and interactive projects with block-based programming.</p>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <div class="container hero" id="home">
-      <div>
-        <div class="eyebrow">Coding made creative</div>
-
-        <h1>
-          Learn to code.<br>
-          Start to <span>create.</span>
-        </h1>
-
-        <p class="hero-description">
-          Explore the world of coding through hands-on lessons,
-          creative projects and challenges. Learn something new
-          and turn your ideas into reality.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#courses" class="button button-dark">
-            Explore courses ↗
-          </a>
-          <a href="#how" class="button button-light">
-            How it works
-          </a>
-        </div>
-
-        <p class="hero-note">
-          AI · Animation · Debugging · Scratch
-        </p>
+<section class="work">
+  <div class="wrap work-grid">
+    <div>
+      <div class="small">Learning through projects</div>
+      <h2>Less watching.<br>More making.</h2>
+      <p>
+        Every course is built around understanding how things work,
+        trying ideas and putting skills into practice.
+        Lessons include exercises and challenges so
+        learning doesn't stop at an explanation.
+      </p>
+    </div>
+    <div class="mini-project">
+      <div class="project-top"><span>PROJECT EXAMPLE</span><span>ANIMATION</span></div>
+      <div class="project-visual">
+        <svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="250" fill="#20232c"/>
+          <g fill="#343b4d">
+            <rect x="40" y="35" width="120" height="8"/>
+            <rect x="40" y="50" width="190" height="8"/>
+            <rect x="40" y="65" width="90" height="8"/>
+          </g>
+          <g transform="translate(245 40)">
+            <rect x="30" y="0" width="60" height="20" fill="#f4c76c"/>
+            <rect x="10" y="20" width="100" height="70" fill="#f4c76c"/>
+            <rect x="25" y="40" width="15" height="15" fill="#20232c"/>
+            <rect x="80" y="40" width="15" height="15" fill="#20232c"/>
+            <rect x="40" y="70" width="40" height="10" fill="#20232c"/>
+            <rect x="0" y="40" width="10" height="40" fill="#f4c76c"/>
+            <rect x="110" y="40" width="10" height="40" fill="#f4c76c"/>
+            <rect x="20" y="90" width="25" height="40" fill="#86a9f2"/>
+            <rect x="75" y="90" width="25" height="40" fill="#86a9f2"/>
+          </g>
+          <g fill="#86a9f2">
+            <rect x="55" y="160" width="40" height="40"/>
+            <rect x="95" y="140" width="40" height="60"/>
+            <rect x="135" y="160" width="40" height="40"/>
+          </g>
+          <g fill="#f4c76c">
+            <rect x="360" y="170" width="15" height="15"/>
+            <rect x="375" y="155" width="15" height="15"/>
+            <rect x="390" y="170" width="15" height="15"/>
+            <rect x="375" y="185" width="15" height="15"/>
+          </g>
+          <path d="M0 215 H480" stroke="#535a69" stroke-width="2"/>
+        </svg>
       </div>
+      <div class="project-bottom"><span>Interactive projects</span><span>Make your own ↗</span></div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero-visual">
-        <div class="code-window">
-          <div class="window-top">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-
-          <div class="window-body">
-            <div><span class="code-purple">const</span> idea = <span class="code-green">"something new"</span>;</div>
-            <div><span class="code-purple">function</span> <span class="code-blue">create</span>() {</div>
-            <div>&nbsp;&nbsp;build(idea);</div>
-            <div>&nbsp;&nbsp;<span class="code-purple">return</span> <span class="code-orange">"Amazing!"</span>;</div>
-            <div>}</div>
-            <br>
-            <div><span class="code-blue">create</span>();</div>
-            <div class="code-green">// Your next idea starts here.</div>
-          </div>
-        </div>
-
-        <div class="visual-label label-one">✳ Think creatively</div>
-        <div class="visual-label label-two">⌘ Build something real</div>
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="heading">
+      <h2>How classes work</h2>
+      <p>A practical, project-based approach to learning programming.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h3>Understand</h3>
+        <p>Learn the concept, explore examples and figure out why the code works.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h3>Experiment</h3>
+        <p>Try things yourself, change code and explore different ways to solve problems.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h3>Build</h3>
+        <p>Use your skills in challenges and projects that put your learning to work.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- COURSES -->
-
-    <section class="courses-section" id="courses">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Explore</div>
-          <h2>Find your thing.</h2>
-          <p>
-            Four ways to explore coding, develop new skills
-            and build projects of your own.
-          </p>
-        </div>
-
-        <div class="course-grid">
-
-          <article class="course-card">
-            <div class="course-icon icon-ai">✳</div>
-            <h3>AI Coding</h3>
-            <p>
-              Explore artificial intelligence and learn how
-              code can be used to build intelligent projects.
-            </p>
-            <a class="course-link" href="#register"
-              data-course="AI Coding">Explore course ↗</a>
-          </article>
-
-          <article class="course-card">
-            <div class="course-icon icon-animation">◈</div>
-            <h3>Animation Coding</h3>
-            <p>
-              Bring characters, shapes and creative ideas
-              to life through coding and animation.
-            </p>
-            <a class="course-link" href="#register"
-              data-course="Animation Coding">Explore course ↗</a>
-          </article>
-
-          <article class="course-card">
-            <div class="course-icon icon-debug">⌘</div>
-            <h3>Debugging</h3>
-            <p>
-              Understand errors, investigate problems and
-              learn how to make code work correctly.
-            </p>
-            <a class="course-link" href="#register"
-              data-course="Debugging">Explore course ↗</a>
-          </article>
-
-          <article class="course-card">
-            <div class="course-icon icon-scratch">▦</div>
-            <h3>Scratch</h3>
-            <p>
-              Create interactive games, animations and stories
-              using visual block-based programming.
-            </p>
-            <a class="course-link" href="#register"
-              data-course="Scratch">Explore course ↗</a>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-
-    <section id="how">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">The process</div>
-          <h2>Learn by doing.</h2>
-          <p>
-            A simple approach that focuses on understanding
-            concepts and actually using them.
-          </p>
-        </div>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">01 / CHOOSE</div>
-            <h3>Pick a course</h3>
-            <p>
-              Choose the coding subject that interests you.
-              No need to have previous experience.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">02 / LEARN</div>
-            <h3>Explore the lesson</h3>
-            <p>
-              Work through concepts, examples and guided
-              activities at your learning level.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">03 / CREATE</div>
-            <h3>Take on challenges</h3>
-            <p>
-              Put what you've learned into practice by
-              completing challenges and projects.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-
-    <section class="pricing-section" id="pricing">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Pricing</div>
-          <h2>Choose how you learn.</h2>
-          <p>
-            Straightforward pricing with three ways
-            to get started.
-          </p>
-        </div>
-
-        <div class="pricing-grid">
-
-          <div class="price-card">
-            <div class="price-tag">Flexible</div>
-            <div class="price">$30 <small>CAD / class</small></div>
-            <p class="price-description">
-              Pay for individual classes.
-            </p>
-            <a href="#register" data-plan="Single Class"
-              class="button button-light">Get started ↗</a>
-          </div>
-
-          <div class="price-card featured">
-            <div class="price-tag">Monthly</div>
-            <div class="price">$100 <small>CAD / month</small></div>
-            <p class="price-description">
-              A monthly learning option.
-            </p>
-            <a href="#register" data-plan="Monthly Plan"
-              class="button button-dark">Get started ↗</a>
-          </div>
-
-          <div class="price-card">
-            <div class="price-tag">Yearly</div>
-            <div class="price">$2,000 <small>CAD / year</small></div>
-            <p class="price-description">
-              A yearly learning option.
-            </p>
-            <a href="#register" data-plan="Yearly Plan"
-              class="button button-light">Get started ↗</a>
-          </div>
-
-        </div>
-
-        <p class="pricing-note">
-          Class frequency, plan inclusions and scheduling
-          will be confirmed before registration is finalized.
-        </p>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-
-    <section id="about">
-      <div class="container about-layout">
-
-        <div class="about-box">
-          <div>
-            <div class="about-symbol">&lt;/&gt;</div>
-            <p>Ideas become creations.</p>
-          </div>
-        </div>
-
-        <div class="about-text">
-          <div class="eyebrow">About CraftCode</div>
-          <h2>More than just learning syntax.</h2>
-          <p>
-            Coding is about solving problems, experimenting
-            with ideas and discovering what technology
-            makes possible.
-          </p>
-          <p>
-            CraftCode focuses on practical learning.
-            Instead of only memorizing concepts, students
-            get opportunities to apply their knowledge,
-            experiment and create.
-          </p>
-          <p>
-            Whether you're completely new to programming
-            or ready to explore something more advanced,
-            there's a place to start.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FAQ -->
-
-    <section class="faq-section">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Questions</div>
-          <h2>Good to know.</h2>
-        </div>
-
-        <div class="faq-list">
-
-          <details class="faq-item">
-            <summary>Do I need coding experience?</summary>
-            <p>
-              No. Course recommendations can be adjusted
-              to your current experience and learning level.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>What ages can join?</summary>
-            <p>
-              CraftCode welcomes learners at different
-              stages and skill levels. Contact us to discuss
-              the right course.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>How do classes work?</summary>
-            <p>
-              Classes focus on learning concepts, working
-              through examples and practising with coding
-              activities and projects. Scheduling is
-              confirmed during registration.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>Can I choose more than one course?</summary>
-            <p>
-              Yes. You can enquire about multiple courses
-              through the registration form.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>How do I register?</summary>
-            <p>
-              Submit the registration enquiry below.
-              You'll be contacted to discuss the course,
-              availability and next steps.
-            </p>
-          </details>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- REGISTRATION -->
-
-    <section class="register-section" id="register">
-      <div class="container register-layout">
-
-        <div class="register-info">
-          <div class="eyebrow">Get started</div>
-          <h2>Ready to create something?</h2>
-          <p>
-            Interested in learning with CraftCode?
-            Send a registration enquiry and we'll
-            discuss the next steps.
-          </p>
-        </div>
-
-        <div class="form-card">
-
-          <form id="registrationForm">
-
-            <div class="form-row">
-              <div class="field">
-                <label for="studentName">Student name</label>
-                <input type="text" id="studentName"
-                  name="studentName" required
-                  placeholder="Your name">
-              </div>
-
-              <div class="field">
-                <label for="email">Parent/guardian email</label>
-                <input type="email" id="email"
-                  name="email" required
-                  placeholder="Email address">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="course">Choose a course</label>
-              <select id="course" name="course" required>
-                <option value="">Select a course</option>
-                <option>AI Coding</option>
-                <option>Animation Coding</option>
-                <option>Debugging</option>
-                <option>Scratch</option>
-                <option>Multiple courses</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="plan">Choose a plan</label>
-              <select id="plan" name="plan" required>
-                <option value="">Select a plan</option>
-                <option value="Single Class - $30 CAD">Single Class - $30 CAD</option>
-                <option value="Monthly - $100 CAD">Monthly - $100 CAD</option>
-                <option value="Yearly - $2,000 CAD">Yearly - $2,000 CAD</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="message">Anything else? (optional)</label>
-              <textarea id="message" name="message"
-                placeholder="Tell us about your coding experience or what you'd like to learn."></textarea>
-            </div>
-
-            <button type="submit" class="button button-dark form-submit">
-              Send registration enquiry ↗
-            </button>
-
-            <p class="form-message">
-              This is an enquiry, not a confirmed booking
-              or payment.
-            </p>
-
-            <p id="formStatus" class="form-message"
-              role="status" aria-live="polite"></p>
-
-          </form>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-
-  <footer>
-    <div class="container">
-
-      <div class="footer-main">
-        <div class="footer-brand">
-          <a href="#home" class="logo">Craft<span>Code</span>.</a>
-          <p>
-            Learn to code. Explore ideas.
-            Create something of your own.
-          </p>
-        </div>
-
-        <div class="footer-links">
-          <a href="#courses">Courses</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#about">About</a>
-          <a href="#register">Register</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© <span id="year"></span> CraftCode. All rights reserved.</span>
-        <a href="#home">Back to top ↑</a>
-      </div>
-
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="heading">
+      <h2>Pricing</h2>
+      <p>Choose the option that works for your learning schedule.</p>
     </div>
-  </footer>
+    <div class="prices">
+      <div class="price">
+        <span class="name">Single class</span>
+        <h3>$30 <small>CAD</small></h3>
+        <p>Book an individual class.</p>
+        <a href="#register" data-plan="Single Class">Enquire ↗</a>
+      </div>
+      <div class="price">
+        <span class="name">Monthly</span>
+        <h3>$100 <small>CAD / month</small></h3>
+        <p>Monthly learning plan.</p>
+        <a href="#register" data-plan="Monthly">Enquire ↗</a>
+      </div>
+      <div class="price">
+        <span class="name">Yearly</span>
+        <h3>$2,000 <small>CAD / year</small></h3>
+        <p>Yearly learning plan.</p>
+        <a href="#register" data-plan="Yearly">Enquire ↗</a>
+      </div>
+    </div>
+    <p class="price-note">Class frequency, scheduling and plan inclusions are confirmed before booking.</p>
+  </div>
+</section>
 
-  <script>
-    // MOBILE NAVIGATION
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="about-mark">&lt;/&gt;</div>
+    <div>
+      <div class="small">About</div>
+      <h2>What is CraftCode?</h2>
+      <p>
+        CraftCode is a coding tutoring program built around
+        learning through practice. Classes focus on
+        understanding concepts, solving problems and
+        creating projects instead of simply memorizing code.
+      </p>
+      <p>
+        From Scratch to AI coding, the goal is to make
+        programming understandable, useful and creative
+        for students at different skill levels.
+      </p>
+    </div>
+  </div>
+</section>
 
-    const menuButton = document.getElementById("menuButton");
-    const navLinks = document.getElementById("navLinks");
+<section class="section">
+  <div class="wrap">
+    <div class="heading"><h2>Questions</h2></div>
+    <div class="faq">
+      <details>
+        <summary>Do I need experience?</summary>
+        <p>No. Courses can be approached at different learning levels. We can discuss your experience when you enquire.</p>
+      </details>
+      <details>
+        <summary>Who are the classes for?</summary>
+        <p>Students with different ages and skill levels. Contact us to discuss whether a course is a good fit.</p>
+      </details>
+      <details>
+        <summary>What happens in a class?</summary>
+        <p>Classes include explanations, demonstrations, practical exercises and coding challenges.</p>
+      </details>
+      <details>
+        <summary>How do I register?</summary>
+        <p>Send an enquiry below. Scheduling and other details will be confirmed before a booking is finalized.</p>
+      </details>
+    </div>
+  </div>
+</section>
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", isOpen);
-      menuButton.textContent = isOpen ? "✕" : "☰";
-    });
+<section class="register" id="register">
+  <div class="wrap reg-grid">
+    <div class="reg-intro">
+      <div class="small">Registration</div>
+      <h2>Let's get started.</h2>
+      <p>
+        Interested in a course? Send an enquiry
+        and we'll get back to you with details.
+      </p>
+    </div>
+    <form id="registration">
+      <div class="fields">
+        <div class="field">
+          <label for="student">Student name</label>
+          <input id="student" name="student" required>
+        </div>
+        <div class="field">
+          <label for="email">Parent/guardian email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="courseSelect">Course</label>
+        <select id="courseSelect" name="course" required>
+          <option value="">Choose a course</option>
+          <option>AI Coding</option>
+          <option>Animation Coding</option>
+          <option>Debugging</option>
+          <option>Scratch</option>
+          <option>Multiple courses</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="planSelect">Plan</label>
+        <select id="planSelect" name="plan" required>
+          <option value="">Choose a plan</option>
+          <option>Single class - $30 CAD</option>
+          <option>Monthly - $100 CAD</option>
+          <option>Yearly - $2,000 CAD</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="msg">Message (optional)</label>
+        <textarea id="msg" name="msg" placeholder="Anything you'd like us to know?"></textarea>
+      </div>
+      <button class="submit" type="submit">Send enquiry ↗</button>
+      <p class="form-note">Submitting an enquiry does not confirm a booking or payment.</p>
+      <p id="status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.textContent = "☰";
-      });
-    });
+<footer>
+  <div class="wrap footer">
+    <a href="#" class="brand">Craft<span>Code</span>.</a>
+    <p>© <span id="year"></span> CraftCode</p>
+    <div class="footerlinks">
+      <a href="#courses">Courses</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#register">Contact</a>
+    </div>
+  </div>
+</footer>
 
-    // AUTOMATIC COURSE AND PLAN SELECTION
+<script>
+const menu=document.getElementById("menu");
+const nav=document.getElementById("nav");
 
-    document.querySelectorAll("[data-course]").forEach(link => {
-      link.addEventListener("click", () => {
-        document.getElementById("course").value =
-          link.dataset.course;
-      });
-    });
+menu.addEventListener("click",()=>{
+  nav.classList.toggle("open");
+});
 
-    document.querySelectorAll("[data-plan]").forEach(link => {
-      link.addEventListener("click", () => {
-        const plan = link.dataset.plan;
-        const select = document.getElementById("plan");
+nav.querySelectorAll("a").forEach(a=>{
+  a.addEventListener("click",()=>nav.classList.remove("open"));
+});
 
-        const options = {
-          "Single Class": "Single Class - $30 CAD",
-          "Monthly Plan": "Monthly - $100 CAD",
-          "Yearly Plan": "Yearly - $2,000 CAD"
-        };
+document.getElementById("year").textContent=new Date().getFullYear();
 
-        select.value = options[plan] || "";
-      });
-    });
+document.querySelectorAll("[data-course]").forEach(a=>{
+  a.addEventListener("click",()=>{
+    document.getElementById("courseSelect").value=a.dataset.course;
+  });
+});
 
-    // FOOTER YEAR
+document.querySelectorAll("[data-plan]").forEach(a=>{
+  a.addEventListener("click",()=>{
+    const p=a.dataset.plan;
+    const select=document.getElementById("planSelect");
+    const map={
+      "Single Class":"Single class - $30 CAD",
+      "Monthly":"Monthly - $100 CAD",
+      "Yearly":"Yearly - $2,000 CAD"
+    };
+    select.value=map[p]||"";
+  });
+});
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+document.getElementById("registration").addEventListener("submit",function(e){
+  e.preventDefault();
 
-    // REGISTRATION ENQUIRY
+  // CHANGE THIS TO THE BUSINESS CONTACT EMAIL
+  const contact="YOUR-CONTACT-EMAIL@example.com";
 
-    document.getElementById("registrationForm")
-      .addEventListener("submit", function(event) {
+  const status=document.getElementById("status");
 
-        event.preventDefault();
+  if(contact.includes("YOUR-CONTACT-EMAIL")){
+    status.textContent="The registration email has not been configured yet.";
+    return;
+  }
 
-        const emailAddress = "YOUR-CONTACT-EMAIL@example.com";
-        const status = document.getElementById("formStatus");
+  const data=new FormData(this);
+  const subject=encodeURIComponent("CraftCode registration enquiry");
+  const body=encodeURIComponent(
+    "Student: "+data.get("student")+"\n"+
+    "Parent/guardian email: "+data.get("email")+"\n"+
+    "Course: "+data.get("course")+"\n"+
+    "Plan: "+data.get("plan")+"\n"+
+    "Message: "+data.get("msg")
+  );
 
-        if (emailAddress.includes("YOUR-CONTACT-EMAIL")) {
-          status.textContent =
-            "Registration email is not configured yet. Please contact us directly.";
-          return;
-        }
-
-        const form = new FormData(this);
-
-        const subject = encodeURIComponent(
-          "CraftCode Registration Enquiry"
-        );
-
-        const body = encodeURIComponent(
-          "New CraftCode registration enquiry\n\n" +
-          "Student: " + form.get("studentName") + "\n" +
-          "Parent/Guardian email: " + form.get("email") + "\n" +
-          "Course: " + form.get("course") + "\n" +
-          "Plan: " + form.get("plan") + "\n" +
-          "Message: " + (form.get("message") || "None")
-        );
-
-        window.location.href =
-          "mailto:" + emailAddress +
-          "?subject=" + subject +
-          "&body=" + body;
-
-        status.textContent =
-          "Your email application should open with your enquiry. Send it there to complete the request.";
-      });
-  </script>
-
+  window.location.href="mailto:"+contact+"?subject="+subject+"&body="+body;
+  status.textContent="Your email application should open. Send the email to complete your enquiry.";
+});
+</script>
 </body>
 </html>
