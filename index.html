@@ -4,788 +4,671 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CraftCode — Build what's next.</title>
-<meta name="description" content="Creative coding classes. Learn by building games, animations and more.">
+<title>CraftCode — Coding Classes</title>
+<meta name="description" content="Learn coding through practical, creative projects at CraftCode.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --black:#08090b;
-  --dark:#111318;
-  --white:#f7f8fa;
-  --muted:#9297a2;
-  --line:#e7e8eb;
-  --lime:#b8f34a;
-  --blue:#7c9cff;
+  --black: #171717;
+  --grey: #777;
+  --light: #f6f6f4;
+  --line: #e7e7e4;
+  --accent: #a5d64a;
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  margin:0;
-  font-family:"DM Sans",Arial,sans-serif;
-  color:#111318;
-  background:#fff;
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--black);
+  background: white;
+  -webkit-font-smoothing: antialiased;
 }
-a {color:inherit;text-decoration:none}
-button {font:inherit}
-.nav {
-  height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 7%;
-  background:var(--black);
-  color:white;
-  border-bottom:1px solid #24262c;
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
-.brand {
-  font-size:21px;
-  font-weight:800;
-  letter-spacing:-1.2px;
+
+button { font: inherit; }
+
+nav {
+  height: 68px;
+  padding: 0 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
-.brand span {color:var(--lime)}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+
+.logo span { color: #7eaa31; }
+
 .nav-links {
-  display:flex;
-  gap:34px;
-  align-items:center;
-  font-size:13px;
-  color:#c4c6cc;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 13px;
+  color: #555;
 }
-.nav-links a:hover {color:white}
-.nav-button {
-  padding:11px 17px;
-  border-radius:30px;
-  background:white;
-  color:#111;
-  font-weight:600;
+
+.nav-links a:hover { color: black; }
+
+.nav-cta {
+  background: var(--black);
+  color: white !important;
+  padding: 11px 17px;
+  border-radius: 5px;
 }
+
 .menu {
-  display:none;
-  background:none;
-  color:white;
-  border:0;
-  font-size:24px;
+  display: none;
+  border: 0;
+  background: none;
+  font-size: 23px;
 }
+
+.container {
+  max-width: 1100px;
+  width: 84%;
+  margin: auto;
+}
+
 .hero {
-  min-height:690px;
-  padding:105px 7% 70px;
-  background:
-    radial-gradient(ellipse at 75% 50%,rgba(91,115,185,.18),transparent 35%),
-    var(--black);
-  color:white;
-  overflow:hidden;
-  position:relative;
+  padding: 115px 0 105px;
+  text-align: center;
 }
-.hero-inner {
-  max-width:1150px;
-  margin:auto;
-  position:relative;
-  z-index:2;
+
+.hero-label {
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
 }
-.eyebrow {
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  color:var(--lime);
-  font-weight:700;
-}
+
 .hero h1 {
-  font-size:clamp(62px,9.3vw,118px);
-  letter-spacing:-.085em;
-  line-height:.94;
-  max-width:900px;
-  margin:28px 0;
-  font-weight:700;
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: 1.04;
+  letter-spacing: -5px;
+  font-weight: 700;
+  margin: 0;
 }
-.hero h1 span {color:var(--lime)}
-.hero-copy {
-  color:#aeb2bd;
-  max-width:430px;
-  font-size:17px;
-  line-height:1.7;
+
+.hero h1 span { color: #777; }
+
+.hero p {
+  max-width: 480px;
+  margin: 25px auto 0;
+  color: var(--grey);
+  font-size: 16px;
+  line-height: 1.8;
 }
-.hero-actions {
-  display:flex;
-  gap:13px;
-  margin-top:32px;
-  flex-wrap:wrap;
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
 }
-.btn {
-  display:inline-flex;
-  padding:15px 23px;
-  border-radius:30px;
-  font-size:13px;
-  font-weight:700;
-  transition:.2s;
+
+.button {
+  display: inline-block;
+  padding: 13px 20px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .2s;
 }
-.btn-primary {
-  background:var(--lime);
-  color:#10120c;
+
+.button-dark {
+  background: var(--black);
+  color: white;
 }
-.btn-primary:hover {background:#d1ff7b;transform:translateY(-2px)}
-.btn-secondary {
-  border:1px solid #444750;
-  color:white;
+
+.button-dark:hover { background: #444; }
+
+.button-outline {
+  border: 1px solid #ddd;
 }
-.btn-secondary:hover {background:#22252c}
-.hero-note {
-  margin-top:75px;
-  display:flex;
-  gap:35px;
-  color:#777d88;
-  font-size:11px;
-  letter-spacing:1px;
-  text-transform:uppercase;
+
+.button-outline:hover { background: var(--light); }
+
+.hero-bottom {
+  margin-top: 85px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 11px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
 }
-.hero-graphic {
-  position:absolute;
-  right:4%;
-  top:17%;
-  width:390px;
-  height:390px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.12);
-  display:grid;
-  place-items:center;
-  opacity:.9;
+
+.section {
+  padding: 85px 0;
+  border-top: 1px solid var(--line);
 }
-.orbit {
-  position:absolute;
-  width:310px;
-  height:310px;
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:50%;
-  transform:rotate(-30deg) scaleY(.55);
+
+.section-label {
+  color: #888;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
-.orbit.two {
-  width:390px;
-  height:390px;
-  transform:rotate(55deg) scaleY(.5);
+
+.section-title {
+  font-size: clamp(35px, 5vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -2.8px;
+  margin: 0;
+  font-weight: 650;
 }
-.core {
-  width:155px;
-  height:155px;
-  border-radius:38px;
-  background:linear-gradient(145deg,#d8ff8c,#8acb30);
-  transform:rotate(-18deg);
-  box-shadow:0 0 90px rgba(184,243,74,.2);
-  display:grid;
-  place-items:center;
-  color:#111;
-  font-size:62px;
-  font-weight:800;
+
+.section-intro {
+  color: var(--grey);
+  max-width: 430px;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 17px;
 }
-.orbit-dot {
-  position:absolute;
-  width:17px;height:17px;
-  border-radius:50%;
-  background:#8daaff;
-  top:60px;right:80px;
-  box-shadow:0 0 30px #8daaff;
-}
-.intro {
-  padding:115px 7%;
-  text-align:center;
-}
-.intro h2 {
-  max-width:850px;
-  margin:20px auto;
-  font-size:clamp(37px,6vw,70px);
-  line-height:1.04;
-  letter-spacing:-.065em;
-}
-.intro h2 span {color:#9297a2}
-.intro p {
-  color:#777d88;
-  max-width:510px;
-  margin:20px auto 0;
-  line-height:1.7;
-  font-size:15px;
-}
-.kicker {
-  color:#737985;
-  font-size:11px;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  font-weight:700;
-}
+
 .courses {
-  padding:100px 7%;
-  background:#f4f5f7;
+  background: var(--light);
 }
-.section-wrap {max-width:1150px;margin:auto}
-.section-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:30px;
-  margin-bottom:45px;
+
+.course-list {
+  margin-top: 45px;
+  border-top: 1px solid #deded9;
 }
-.section-head h2 {
-  font-size:clamp(40px,6vw,66px);
-  letter-spacing:-.07em;
-  line-height:1;
-  margin:13px 0 0;
+
+.course {
+  display: grid;
+  grid-template-columns: 55px 1fr 1.2fr 25px;
+  gap: 20px;
+  align-items: center;
+  padding: 25px 0;
+  border-bottom: 1px solid #deded9;
+  transition: padding .2s;
 }
-.section-head p {
-  color:#747985;
-  font-size:14px;
-  line-height:1.7;
-  max-width:310px;
+
+.course:hover { padding-left: 8px; }
+
+.course-number {
+  font-size: 12px;
+  color: #999;
 }
-.course-grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+
+.course h3 {
+  font-size: 20px;
+  letter-spacing: -.6px;
+  margin: 0;
 }
-.course-card {
-  min-height:300px;
-  border-radius:18px;
-  padding:30px;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:transform .25s;
+
+.course p {
+  color: var(--grey);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
 }
-.course-card:hover {transform:translateY(-5px)}
-.course-card.ai {background:#111827;color:white}
-.course-card.animation {background:#dce5ff}
-.course-card.debug {background:#e5f3d4}
-.course-card.scratch {background:#f6e4dc}
-.course-top {
-  display:flex;
-  justify-content:space-between;
-  font-size:11px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  opacity:.7;
+
+.course-arrow {
+  font-size: 20px;
+  color: #777;
 }
-.course-card h3 {
-  font-size:36px;
-  letter-spacing:-.06em;
-  margin:0 0 8px;
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 40px;
 }
-.course-card p {
-  font-size:14px;
-  line-height:1.6;
-  max-width:330px;
-  margin:0;
-  opacity:.72;
+
+.project {
+  background: var(--light);
+  overflow: hidden;
 }
-.course-link {
-  position:absolute;
-  right:27px;
-  bottom:26px;
-  width:38px;height:38px;
-  border:1px solid currentColor;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:19px;
+
+.project-image {
+  height: 175px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eceee8;
 }
-.card-art {
-  position:absolute;
-  right:35px;
-  top:65px;
-  width:130px;
-  height:130px;
-  opacity:.85;
+
+.project-image.two { background: #e9edf5; }
+.project-image.three { background: #f1ece7; }
+
+.project-image svg {
+  width: 100px;
+  height: 100px;
 }
-.ai .card-art {
-  border:1px solid #7386bd;
-  border-radius:50%;
-  box-shadow:0 0 0 20px rgba(124,156,255,.07),0 0 0 40px rgba(124,156,255,.05);
+
+.project-info {
+  padding: 18px;
 }
-.ai .card-art:after {
-  content:"";
-  position:absolute;
-  inset:35px;
-  background:var(--lime);
-  border-radius:28px;
-  transform:rotate(30deg);
+
+.project-info h3 {
+  margin: 0;
+  font-size: 16px;
 }
-.animation .card-art {
-  border:2px solid #344e9d;
-  border-radius:50%;
+
+.project-info p {
+  color: var(--grey);
+  font-size: 12px;
+  margin: 8px 0 0;
 }
-.animation .card-art:after {
-  content:"";
-  position:absolute;
-  width:60px;height:60px;
-  background:#7c9cff;
-  border-radius:50%;
-  top:32px;left:32px;
+
+.approach {
+  background: var(--light);
 }
-.debug .card-art {
-  border:2px solid #4f7b2a;
-  transform:rotate(45deg);
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  margin-top: 45px;
 }
-.debug .card-art:after {
-  content:"";
-  position:absolute;
-  inset:25px;
-  border:2px solid #4f7b2a;
+
+.step {
+  border-top: 1px solid #d8d8d3;
+  padding-top: 18px;
 }
-.scratch .card-art {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  transform:rotate(-10deg);
+
+.step-number {
+  color: #888;
+  font-size: 11px;
 }
-.scratch .card-art i {
-  display:block;
-  background:#ed916f;
-  border-radius:8px;
+
+.step h3 {
+  font-size: 18px;
+  margin: 22px 0 10px;
 }
-.scratch .card-art i:nth-child(2n) {background:#222}
-.scratch .card-art i:nth-child(3n) {background:#f5bd56}
-.work {
-  padding:110px 7%;
-  background:var(--black);
-  color:white;
-  overflow:hidden;
+
+.step p {
+  color: var(--grey);
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
 }
-.work .section-head p {color:#999eaa}
-.work-layout {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
-}
-.work-copy h2 {
-  font-size:clamp(42px,6vw,70px);
-  line-height:1;
-  letter-spacing:-.075em;
-  margin:18px 0;
-}
-.work-copy h2 span {color:var(--lime)}
-.work-copy p {
-  color:#a5a9b2;
-  max-width:390px;
-  line-height:1.8;
-  font-size:15px;
-}
-.work-visual {
-  height:390px;
-  background:#171a22;
-  border:1px solid #2b303b;
-  border-radius:22px;
-  padding:22px;
-  position:relative;
-  overflow:hidden;
-}
-.window-bar {
-  display:flex;
-  gap:7px;
-  padding-bottom:18px;
-  border-bottom:1px solid #30343d;
-}
-.window-bar i {
-  width:8px;height:8px;
-  border-radius:50%;
-  background:#5d626d;
-}
-.editor {
-  display:flex;
-  gap:22px;
-  padding-top:24px;
-  font-family:monospace;
-  font-size:12px;
-  line-height:2.2;
-  color:#c1c6d2;
-}
-.line-numbers {color:#5d6575}
-.code-green {color:#b8f34a}
-.code-blue {color:#91aaff}
-.code-orange {color:#e9a879}
-.preview {
-  position:absolute;
-  right:20px;
-  bottom:22px;
-  width:47%;
-  height:170px;
-  background:#c9fa6a;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-}
-.preview-shape {
-  width:85px;height:85px;
-  border-radius:24px;
-  background:#171a22;
-  transform:rotate(20deg);
-  animation:float 3s ease-in-out infinite alternate;
-}
-@keyframes float {
-  to {transform:translateY(-12px) rotate(35deg)}
-}
-.method {
-  padding:110px 7%;
-}
-.method-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:35px;
-  margin-top:55px;
-}
-.method-item {
-  border-top:1px solid #dfe1e5;
-  padding-top:22px;
-}
-.method-number {
-  font-size:12px;
-  color:#8a909b;
-}
-.method-item h3 {
-  font-size:24px;
-  letter-spacing:-.04em;
-  margin:25px 0 10px;
-}
-.method-item p {
-  color:#777d88;
-  font-size:14px;
-  line-height:1.7;
-  max-width:290px;
-}
-.pricing {
-  background:#f4f5f7;
-  padding:110px 7%;
-}
+
 .price-list {
-  margin-top:45px;
-  border-top:1px solid #d9dce1;
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
 }
+
 .price-row {
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:20px;
-  align-items:center;
-  padding:26px 0;
-  border-bottom:1px solid #d9dce1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  padding: 24px 0;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
 }
-.price-row strong {font-size:20px}
-.price-row .amount {
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:-1px;
+
+.price-row strong {
+  font-size: 16px;
 }
-.price-row small {color:#7c828d}
-.price-foot {
-  margin-top:22px;
-  font-size:12px;
-  line-height:1.7;
-  color:#737985;
+
+.price {
+  font-size: 23px;
+  font-weight: 650;
 }
-.about {
-  padding:110px 7%;
+
+.price-note {
+  color: var(--grey);
+  font-size: 12px;
 }
+
+.pricing-disclaimer {
+  color: var(--grey);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 18px;
+}
+
 .about-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
 }
-.about h2 {
-  font-size:clamp(43px,6vw,72px);
-  letter-spacing:-.075em;
-  line-height:.98;
-  margin:18px 0;
+
+.about-copy {
+  color: var(--grey);
+  font-size: 14px;
+  line-height: 1.9;
+  padding-top: 25px;
 }
-.about-text {
-  padding-top:30px;
-  max-width:470px;
-  color:#6f7580;
-  font-size:15px;
-  line-height:1.9;
-}
+
 .contact {
-  background:var(--black);
-  color:white;
-  padding:100px 7%;
+  background: var(--black);
+  color: white;
+  padding: 85px 0;
 }
+
 .contact-inner {
-  max-width:1150px;
-  margin:auto;
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
 }
+
 .contact h2 {
-  font-size:clamp(52px,8vw,100px);
-  line-height:.95;
-  letter-spacing:-.08em;
-  margin:18px 0 0;
+  font-size: clamp(40px, 6vw, 64px);
+  letter-spacing: -3px;
+  line-height: 1.05;
+  margin: 15px 0 0;
 }
-.contact h2 span {color:var(--lime)}
+
 .contact p {
-  color:#a4a9b3;
-  max-width:300px;
-  line-height:1.7;
-  font-size:14px;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 340px;
 }
+
+.contact .button {
+  background: white;
+  color: black;
+}
+
+.contact .button:hover { background: var(--accent); }
+
 footer {
-  background:var(--black);
-  color:#818691;
-  border-top:1px solid #282b32;
-  padding:24px 7%;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  font-size:11px;
+  padding: 24px 8%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 11px;
+  color: #888;
+  border-top: 1px solid #333;
+  background: var(--black);
 }
-footer strong {color:white}
-@media(max-width:850px) {
-  .hero-graphic {right:-150px;opacity:.35}
-  .hero {min-height:650px}
-  .nav {padding:0 5%}
+
+footer strong { color: white; }
+
+@media(max-width:750px) {
+  nav { padding: 0 6%; }
+
+  .menu { display: block; }
+
   .nav-links {
-    display:none;
-    position:absolute;
-    top:72px;left:0;right:0;
-    background:#111318;
-    padding:25px 6%;
-    flex-direction:column;
-    align-items:stretch;
-    z-index:10;
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid var(--line);
+    padding: 22px 6%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
   }
-  .nav-links.show {display:flex}
-  .menu {display:block}
-  .section-head {align-items:start;flex-direction:column;gap:10px}
-  .work-layout {grid-template-columns:1fr;gap:35px}
-  .about-grid {grid-template-columns:1fr;gap:5px}
-  .contact-inner {align-items:start;flex-direction:column}
+
+  .nav-links.show { display: flex; }
+
+  .container { width: 88%; }
+
+  .hero { padding: 90px 0 65px; }
+
+  .hero h1 { letter-spacing: -3px; }
+
+  .hero-bottom { gap: 15px; flex-wrap: wrap; }
+
+  .course {
+    grid-template-columns: 35px 1fr 25px;
+    gap: 12px;
+  }
+
+  .course p { grid-column: 2; }
+  .course-arrow { grid-column: 3; grid-row: 1; }
+
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+
+  .steps { grid-template-columns: 1fr; gap: 28px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 0; }
+
+  .contact-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  footer { flex-wrap: wrap; padding: 24px 6%; }
 }
-@media(max-width:600px) {
-  .hero {padding:85px 6% 45px;min-height:620px}
-  .hero h1 {font-size:65px}
-  .hero-graphic {top:35%;right:-210px}
-  .hero-note {gap:15px;flex-wrap:wrap;margin-top:55px}
-  .intro {padding:80px 6%}
-  .courses,.work,.method,.pricing,.about,.contact {padding:80px 6%}
-  .course-grid {grid-template-columns:1fr}
-  .course-card {min-height:275px}
-  .method-grid {grid-template-columns:1fr;gap:28px}
-  .price-row {grid-template-columns:1fr 1fr;gap:8px}
-  .price-row small {grid-column:1/-1}
-  .price-row .amount {text-align:right}
-  .work-visual {height:330px}
-  .preview {height:130px}
-  footer {padding:22px 6%;flex-wrap:wrap}
+
+@media(max-width:480px) {
+  .hero h1 { font-size: 49px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .price-row { grid-template-columns: 1fr 1fr; }
+  .price-note { grid-column: 1 / -1; }
+  .section { padding: 65px 0; }
 }
 </style>
 </head>
 
 <body>
 
-<header class="nav">
-  <a href="#" class="brand">craft<span>code.</span></a>
-  <button class="menu" onclick="toggleMenu()" aria-label="Open navigation">☰</button>
-  <nav class="nav-links" id="navLinks">
+<nav>
+  <a class="logo" href="#">craft<span>code.</span></a>
+  <button class="menu" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+
+  <div class="nav-links" id="navLinks">
     <a href="#courses" onclick="closeMenu()">Courses</a>
-    <a href="#approach" onclick="closeMenu()">Our approach</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
     <a href="#pricing" onclick="closeMenu()">Pricing</a>
     <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#contact" class="nav-button" onclick="closeMenu()">Get started ↗</a>
-  </nav>
-</header>
+    <a href="#contact" class="nav-cta" onclick="closeMenu()">Get started</a>
+  </div>
+</nav>
 
 <main>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">CREATIVE TECHNOLOGY · LEARN BY BUILDING</div>
-    <h1>Ideas are<br>just the <span>start.</span></h1>
-    <p class="hero-copy">
-      Learn to code by making things. Explore AI, animation, games and the logic behind the technology you use every day.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#courses">Explore courses ↗</a>
-      <a class="btn btn-secondary" href="#approach">How it works</a>
+  <div class="container">
+    <div class="hero-label">Online coding classes · CraftCode</div>
+    <h1>Learn coding.<br><span>Build something.</span></h1>
+    <p>Practical coding lessons for curious minds. Learn through projects, explore new technology and develop real skills.</p>
+
+    <div class="hero-buttons">
+      <a class="button button-dark" href="#courses">Explore courses</a>
+      <a class="button button-outline" href="#about">Learn about CraftCode</a>
     </div>
-    <div class="hero-note">
-      <span>01 — Explore</span>
-      <span>02 — Experiment</span>
-      <span>03 — Build</span>
+
+    <div class="hero-bottom">
+      <span>AI coding</span>
+      <span>Animation</span>
+      <span>Debugging</span>
+      <span>Scratch</span>
     </div>
-  </div>
-  <div class="hero-graphic" aria-hidden="true">
-    <div class="orbit"></div>
-    <div class="orbit two"></div>
-    <div class="orbit-dot"></div>
-    <div class="core">C.</div>
   </div>
 </section>
 
-<section class="intro">
-  <div class="kicker">A DIFFERENT WAY TO LEARN</div>
-  <h2>Don't just learn how technology works. <span>Learn how to make it work for you.</span></h2>
-  <p>CraftCode turns coding concepts into practical projects. Start with the basics, experiment with ideas and build your skills one project at a time.</p>
-</section>
+<section class="section courses" id="courses">
+  <div class="container">
+    <div class="section-label">01 — Courses</div>
+    <h2 class="section-title">What do you want to make?</h2>
+    <p class="section-intro">Choose a subject and start building your coding skills. Courses accommodate different experience levels.</p>
 
-<section class="courses" id="courses">
-  <div class="section-wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">THE COURSE COLLECTION</div>
-        <h2>Find your thing.</h2>
-      </div>
-      <p>Different starting points. One shared idea: learn by creating.</p>
-    </div>
-
-    <div class="course-grid">
-      <a class="course-card ai" href="#contact">
-        <div class="course-top"><span>01 / Explore</span><span>AI</span></div>
-        <div class="card-art"></div>
-        <div>
-          <h3>AI Coding</h3>
-          <p>Explore artificial intelligence and use code to turn ideas into working projects.</p>
-        </div>
-        <div class="course-link">↗</div>
+    <div class="course-list">
+      <a href="#contact" class="course">
+        <div class="course-number">01</div>
+        <h3>AI Coding</h3>
+        <p>Explore AI tools and build projects using code and artificial intelligence.</p>
+        <div class="course-arrow">↗</div>
       </a>
 
-      <a class="course-card animation" href="#contact">
-        <div class="course-top"><span>02 / Create</span><span>Motion</span></div>
-        <div class="card-art"></div>
-        <div>
-          <h3>Animation</h3>
-          <p>Experiment with movement, timing and code to bring digital ideas to life.</p>
-        </div>
-        <div class="course-link">↗</div>
+      <a href="#contact" class="course">
+        <div class="course-number">02</div>
+        <h3>Animation Coding</h3>
+        <p>Learn how movement, timing and code bring digital ideas to life.</p>
+        <div class="course-arrow">↗</div>
       </a>
 
-      <a class="course-card debug" href="#contact">
-        <div class="course-top"><span>03 / Understand</span><span>Logic</span></div>
-        <div class="card-art"></div>
-        <div>
-          <h3>Debugging</h3>
-          <p>Understand errors, trace problems and develop the skills to fix your own code.</p>
-        </div>
-        <div class="course-link">↗</div>
+      <a href="#contact" class="course">
+        <div class="course-number">03</div>
+        <h3>Debugging</h3>
+        <p>Understand errors, solve problems and learn to improve your code.</p>
+        <div class="course-arrow">↗</div>
       </a>
 
-      <a class="course-card scratch" href="#contact">
-        <div class="course-top"><span>04 / Play</span><span>Scratch</span></div>
-        <div class="card-art"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div>
-          <h3>Scratch</h3>
-          <p>Build games, stories and interactive experiences with visual programming.</p>
-        </div>
-        <div class="course-link">↗</div>
+      <a href="#contact" class="course">
+        <div class="course-number">04</div>
+        <h3>Scratch</h3>
+        <p>Create interactive games, stories and projects using visual programming.</p>
+        <div class="course-arrow">↗</div>
       </a>
     </div>
   </div>
 </section>
 
-<section class="work">
-  <div class="section-wrap work-layout">
-    <div class="work-copy">
-      <div class="eyebrow">LEARNING IN ACTION</div>
-      <h2>From a blank screen to <span>something real.</span></h2>
-      <p>Every concept becomes an opportunity to experiment. Work through challenges, make changes, solve problems and see what your code can do.</p>
-      <a class="btn btn-primary" href="#contact">Start creating ↗</a>
-    </div>
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-label">02 — What you'll build</div>
+    <h2 class="section-title">Learn by doing.</h2>
+    <p class="section-intro">Coding becomes easier to understand when you can see what your ideas become.</p>
 
-    <div class="work-visual">
-      <div class="window-bar"><i></i><i></i><i></i></div>
-      <div class="editor">
-        <div class="line-numbers">01<br>02<br>03<br>04<br>05<br>06<br>07</div>
-        <div>
-          <span class="code-blue">const</span> idea = <span class="code-orange">"something new"</span>;<br>
-          <span class="code-blue">function</span> create() {<br>
-          &nbsp;&nbsp;<span class="code-green">experiment</span>(idea);<br>
-          &nbsp;&nbsp;<span class="code-green">build</span>();<br>
-          &nbsp;&nbsp;<span class="code-green">tryAgain</span>();<br>
-          }<br>
-          create();
+    <div class="projects-grid">
+      <div class="project">
+        <div class="project-image">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="12" y="12" width="76" height="76" rx="15" fill="#A5D64A"/>
+            <path d="M33 65L48 35L67 65H33Z" fill="#171717"/>
+            <circle cx="68" cy="30" r="7" fill="white"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <h3>Interactive games</h3>
+          <p>Logic, movement and interaction</p>
         </div>
       </div>
-      <div class="preview"><div class="preview-shape"></div></div>
+
+      <div class="project">
+        <div class="project-image two">
+          <svg viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="36" stroke="#536DAB" stroke-width="3"/>
+            <circle cx="50" cy="50" r="17" fill="#829DDB"/>
+            <path d="M50 14V86M14 50H86" stroke="#536DAB" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <h3>Animations</h3>
+          <p>Frames, movement and timing</p>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-image three">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="15" y="20" width="70" height="60" rx="7" stroke="#A8755E" stroke-width="3"/>
+            <path d="M27 38L39 50L27 62M47 62H70" stroke="#A8755E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <h3>Creative coding</h3>
+          <p>Code, patterns and experimentation</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="method" id="approach">
-  <div class="section-wrap">
-    <div class="kicker">THE CRAFTCODE APPROACH</div>
-    <div class="section-head">
-      <h2>Learn it.<br>Try it. Build it.</h2>
-      <p>A practical approach that makes room for questions, experimentation and independent thinking.</p>
-    </div>
-    <div class="method-grid">
-      <div class="method-item">
-        <div class="method-number">01 / UNDERSTAND</div>
-        <h3>Start with the idea.</h3>
-        <p>Learn the concepts behind the tools and understand what your code is actually doing.</p>
+<section class="section approach" id="approach">
+  <div class="container">
+    <div class="section-label">03 — How it works</div>
+    <h2 class="section-title">A practical way to learn.</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Understand</h3>
+        <p>Learn the coding concepts and understand how they work.</p>
       </div>
-      <div class="method-item">
-        <div class="method-number">02 / EXPERIMENT</div>
-        <h3>Get hands-on.</h3>
-        <p>Test ideas, change things, make mistakes and discover how different parts work together.</p>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Practise</h3>
+        <p>Try examples, solve challenges and experiment with ideas.</p>
       </div>
-      <div class="method-item">
-        <div class="method-number">03 / CREATE</div>
-        <h3>Make something yours.</h3>
-        <p>Use what you've learned to develop projects and build confidence with coding.</p>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Create</h3>
+        <p>Apply what you've learned to build your own projects.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="pricing" id="pricing">
-  <div class="section-wrap">
-    <div class="kicker">PLANS & PRICING</div>
-    <div class="section-head">
-      <h2>Choose how<br>you learn.</h2>
-      <p>All prices are in Canadian dollars. Ask about the schedule and what's included before enrolling.</p>
-    </div>
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-label">04 — Pricing</div>
+    <h2 class="section-title">Straightforward pricing.</h2>
+    <p class="section-intro">All prices are in CAD.</p>
 
     <div class="price-list">
       <div class="price-row">
         <strong>Single class</strong>
-        <div class="amount">$30</div>
-        <small>Per class</small>
+        <div class="price">$30</div>
+        <div class="price-note">Per class</div>
       </div>
       <div class="price-row">
-        <strong>Monthly</strong>
-        <div class="amount">$100</div>
-        <small>Per month</small>
+        <strong>Monthly plan</strong>
+        <div class="price">$100</div>
+        <div class="price-note">Per month</div>
       </div>
       <div class="price-row">
-        <strong>Yearly</strong>
-        <div class="amount">$2,000</div>
-        <small>Per year</small>
+        <strong>Yearly plan</strong>
+        <div class="price">$2,000</div>
+        <div class="price-note">Per year</div>
       </div>
     </div>
-    <p class="price-foot">Class frequency, duration and plan inclusions should be confirmed before purchase.</p>
+
+    <p class="pricing-disclaimer">Ask about class frequency, duration and plan inclusions before enrolling.</p>
   </div>
 </section>
 
-<section class="about" id="about">
-  <div class="section-wrap about-grid">
+<section class="section" id="about">
+  <div class="container about-grid">
     <div>
-      <div class="kicker">ABOUT CRAFTCODE</div>
-      <h2>Built around<br>curiosity.</h2>
+      <div class="section-label">05 — About</div>
+      <h2 class="section-title">Technology is<br>something you can create.</h2>
     </div>
-    <div class="about-text">
-      <p>Technology is more than something to use. It's something you can understand, question and create with.</p>
-      <p>CraftCode makes coding approachable through guided learning and hands-on projects. Whether you're new to programming or ready to explore something more advanced, there's room to grow.</p>
+    <div class="about-copy">
+      <p>CraftCode helps learners explore programming through practical lessons and creative projects.</p>
+      <p>From first-time coders to students with experience, the focus is on understanding concepts, solving problems and building confidence.</p>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="contact-inner">
+  <div class="container contact-inner">
     <div>
-      <div class="eyebrow">YOUR NEXT IDEA STARTS HERE</div>
-      <h2>Ready to<br><span>make something?</span></h2>
+      <div class="section-label">06 — Contact</div>
+      <h2>Let's get started.</h2>
     </div>
     <div>
-      <p>Have a question or want to find out about classes? Get in touch to discuss courses and scheduling.</p>
-      <a class="btn btn-primary" href="mailto:YOUR-CONTACT-EMAIL@example.com?subject=CraftCode%20Enquiry">Contact CraftCode ↗</a>
+      <p>Interested in a course? Get in touch to ask questions and discuss class options.</p>
+      <a class="button" href="mailto:YOUR-CONTACT-EMAIL@example.com?subject=CraftCode%20Enquiry">Contact CraftCode ↗</a>
     </div>
   </div>
 </section>
@@ -793,8 +676,8 @@ footer strong {color:white}
 </main>
 
 <footer>
-  <div><strong>craftcode.</strong> &nbsp; © 2026</div>
-  <div>LEARN · EXPERIMENT · CREATE</div>
+  <div><strong>craftcode.</strong> © 2026</div>
+  <div>Online coding classes</div>
   <a href="#">Back to top ↑</a>
 </footer>
 
@@ -806,5 +689,6 @@ function closeMenu() {
   document.getElementById("navLinks").classList.remove("show");
 }
 </script>
+
 </body>
 </html>
